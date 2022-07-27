@@ -1,22 +1,22 @@
 ---
 # multilingual page pair id, this must pair with translations of this page. (This name must be unique)
 lng_pair: id_Examples
-title: Examples
+title: Upload Jekyll Site to Github
 
 # post specific
 # if not specified, .name will be used from _data/owner/[language].yml
-author: Mr. Green's Workshop
+author: Tashi Tshering Bhutia
 # multiple category is not supported
 category: jekyll
 # multiple tag entries are possible
 tags: [jekyll, sample, example post]
 # thumbnail image for post
-img: ":post_pic1.jpg"
+img: ":jekyll-github.jpg"
 # disable comments on this page
 #comments_disable: true
 
 # publish date
-date: 2022-02-10 08:11:06 +0900
+date: 2022-07-27 08:11:06 +0900
 
 # seo
 # if not specified, date will be used.
@@ -39,9 +39,122 @@ date: 2022-02-10 08:11:06 +0900
 
 <!-- outline-start -->
 
-This is an example page to display markdown related styles for Mr. Green Jekyll Theme.
+This page will help you to launch your Jekyll project in github.
 
 <!-- outline-end -->
+
+# Creating a GitHub Pages site with Jekyll
+You can use Jekyll to create a GitHub Pages site in a new or existing repository.
+
+
+### Prerequisites
+Before you can use Jekyll to create a GitHub Pages site, you must install Jekyll and Git. For more information, see [Installation](https://jekyllrb.com/docs/installation/in) the Jekyll documentation and [Set up Git](https://docs.github.com/en/articles/set-up-git).
+
+We recommend using [Bundler](http://bundler.io/) to install and run Jekyll. Bundler manages Ruby gem dependencies, reduces Jekyll build errors, and prevents environment-related bugs. To install Bundler:
+
+1.  >**Install Ruby**. For more information, see [Installing Ruby](https://jekyllrb.com/docs/installation/) in the Ruby documentation.
+2.  >**Install Bundler**. For more information, see [Bundler](https://bundler.io/).
+
+
+### Creating a repository for your site
+
+If you want to create a site in an existing repository, skip to the [Creating your site](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site) section.
+
+1.  In the upper-right corner of any page, use the **+** drop-down menu, and select **New repository**.
+
+
+2.  Use the **Owner** drop-down menu, and select the account you want to own the repository.
+
+3.  Type a name for your repository and an optional description. If you're creating a user or organization site, your repository must be named `<user>.github.io` or `<organization>.github.io`. If your user or organization name contains uppercase letters, you must lowercase the letters. For more information, see [About GitHub Pages](https://docs.github.com/en/articles/about-github-pages#types-of-github-pages-sites).
+
+4.  Choose a repository visibility. For more information, see [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility).
+
+###  Creating your site
+
+Before you can create your site, you must have a repository for your site on GitHub. If you're not creating your site in an existing repository, see [Creating a repository for your site](https://tsikkim.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-a-repository-for-your-site).
+
+>**Warning:** GitHub Pages sites are publicly available on the internet, even if the repository for the site is private. If you have sensitive data in your site's repository, you may want to remove the data before publishing. For more information, see [About repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories#about-repository-visibility).
+
+1.  Open Terminal.
+
+2.  If you don't already have a local copy of your repository, navigate to the location where you want to store your site's source files, replacing PARENT-FOLDER with the folder you want  to contain the folder for your repository.
+    
+    `$ cd PARENT-FOLDER`
+
+3.  If you haven't already, initialize a local Git repository, replacing REPOSITORY-NAME with the name of your repository.
+
+    `$ git init REPOSITORY-NAME`
+    > Initialized empty Git repository in /Users/octocat/my-site/.git/
+    #Creates a new folder on your computer, initialized as a Git repository
+Change directories to the repository.
+
+$ cd REPOSITORY-NAME
+# Changes the working directory
+Decide which publishing source you want to use. For more information, see "About GitHub Pages."
+
+Navigate to the publishing source for your site. For more information about publishing sources, see "About GitHub Pages." For example, if you chose to publish your site from the docs folder on the default branch, create and change directories to the docs folder.
+
+$ mkdir docs
+# Creates a new folder called docs
+$ cd docs
+If you chose to publish your site from the gh-pages branch, create and checkout the gh-pages branch.
+
+$ git checkout --orphan gh-pages
+# Creates a new branch, with no history or contents, called gh-pages, and switches to the gh-pages branch
+$ git rm -rf 
+# Removes the contents from your default branch from the working directory
+To create a new Jekyll site, use the jekyll new command:
+
+$ jekyll new --skip-bundle .
+# Creates a Jekyll site in the current directory
+Open the Gemfile that Jekyll created.
+
+Add "#" to the beginning of the line that starts with gem "jekyll" to comment out this line.
+
+Add the github-pages gem by editing the line starting with # gem "github-pages". Change this line to:
+
+gem "github-pages", "~> GITHUB-PAGES-VERSION", group: :jekyll_plugins
+Replace GITHUB-PAGES-VERSION with the latest supported version of the github-pages gem. You can find this version here: "Dependency versions."
+
+The correct version Jekyll will be installed as a dependency of the github-pages gem.
+
+Save and close the Gemfile.
+
+From the command line, run bundle install.
+
+Optionally, make any necessary edits to the _config.yml file. This is required for relative paths when the repository is hosted in a subdirectory. For more information, see "Splitting a subfolder out into a new repository."
+
+domain: my-site.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: https://my-site.github.io  # the base hostname and protocol for your site, e.g. http://example.com
+baseurl: /REPOSITORY-NAME/      # place folder name if the site is served in a subfolder
+Optionally, test your site locally. For more information, see "Testing your GitHub Pages site locally with Jekyll."
+
+Add and commit your work.
+
+git add .
+git commit -m 'Initial GitHub pages site with Jekyll'
+Add your repository on GitHub.com as a remote, replacing USER with the account that owns the repository and REPOSITORY with the name of the repository.
+
+$ git remote add origin https://github.com/USER/REPOSITORY.git
+Push the repository to GitHub, replacing BRANCH with the name of the branch you're working on.
+
+$ git push -u origin BRANCH
+Configure your publishing source. For more information, see "Configuring a publishing source for your GitHub Pages site."
+
+On GitHub, navigate to your site's repository.
+
+Under your repository name, click  Settings.
+Repository settings button
+
+In the "Code and automation" section of the sidebar, click  Pages.
+
+To see your published site, under "GitHub Pages", click your site's URL.
+
+Note: It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub. If you don't see your GitHub Pages site changes reflected in your browser after an hour, see "About Jekyll build errors for GitHub Pages sites."
+
+If your GitHub Pages site is built from a public repository, it is built and deployed with a GitHub Actions workflow run unless you've configured your GitHub Pages site to use a different CI tool. For more information about how to view the workflow status, see "Viewing workflow run history."
+
+
 
 ### Headings (centered)
 {:data-align="center"}
@@ -187,3 +300,6 @@ for i in range(5, 10):
 for i in range(5, 10):
   print(i)
 ```
+
+
+-->
